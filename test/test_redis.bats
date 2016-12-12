@@ -3,6 +3,6 @@
   echo "${output}" 
 
   [ $status -eq 0 ]
-  x="${lines[1]}"
+  x="${lines[0]}"
   [ "${x:0:20}" = "Redis server v=${VERSION}" ]
 }
