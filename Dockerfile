@@ -35,4 +35,4 @@ VOLUME ["${REDIS_DATA_DIR}"]
 EXPOSE 6379
 
 ENTRYPOINT ["entrypoint.sh"]
-CMD ["redis-server", "--daemonize", "no"] 
+CMD ["redis-server", "/etc/redis.conf", "--daemonize", "no"] 
