@@ -8,6 +8,12 @@ fi
 
 if  [ "$1" = "redis-server" ]; then
     shift
+    
+    case "$1" in
+        "-v" | "--version" | "-h" | "--help" ) 
+            exec su-exec redis redis-server "$@" ;;
+    esac
+
     exec su-exec redis redis-server --dir "${REDIS_DATA_DIR}" "$@"
 fi
 
