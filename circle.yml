@@ -49,4 +49,4 @@ deployment:
       - docker push smizy/redis:${TAG_MAJOR}
       - docker push smizy/redis:latest
       - docker logout
-      - curl -X POST 'https://hooks.microbadger.com/images/smizy/redis/kZzvRF3AJodLAJeVZ8aVSKyupOI='
+      - curl -X POST 'https://hooks.microbadger.com/images/smizy/redis/5r9H7ArPAobxrAkstXa5H8xFiPQ='
