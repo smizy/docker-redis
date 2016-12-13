@@ -31,6 +31,7 @@ RUN set -x \
 COPY entrypoint.sh  /usr/local/bin/
 
 VOLUME ["${REDIS_DATA_DIR}"]
+WORKDIR "${REDIS_DATA_DIR}"
 
 EXPOSE 6379
 

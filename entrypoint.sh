@@ -2,19 +2,20 @@
 
 set -e
 
-if [ "${1:0:1}" = '-' ]; then
+# first arg is `-f` or `--some-option`
+# or first arg is `something.conf`
+if [ "${1#-}" != "$1" ] || [ "${1%.conf}" != "$1" ]; then
 	set -- redis-server "$@"
 fi
 
-if  [ "$1" = "redis-server" ]; then
+# allow the container to be started with `--user`
+if [ "$1" = 'redis-server' -a "$(id -u)" = '0' ]; then
     shift
-    
-    case "$1" in
-        "-v" | "--version" | "-h" | "--help" ) 
-            exec su-exec redis redis-server "$@" ;;
-    esac
 
-    exec su-exec redis redis-server --dir "${REDIS_DATA_DIR}" "$@"
+	chown -R redis "${REDIS_DATA_DIR}"
+    cd "${REDIS_DATA_DIR}"
+
+	exec su-exec redis redis-server "$@" --protected-mode no
 fi
 
 exec "$@"
